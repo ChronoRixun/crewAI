@@ -1,7 +1,7 @@
 from typing import List
 from difflib import get_close_matches
 from crewai import Agent, Crew, Process, Task
-from crewai.project import CrewBase, agent, crew, task
+from crewai.project import CrewBase, agent, crew, task, tool
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from node.tools import custom_tools as ct
 
@@ -23,6 +23,48 @@ class Node:
     def tool_functions(self):
         # Back-compat for older CrewAI code-paths
         return self.toolset()
+
+    # ---- CrewAI tool registration ----
+
+    @tool
+    def node_code_analyzer(self):
+        """Run static analysis on Node.js source"""
+        return self.toolset()["Node Code Analyzer"]()
+
+    @tool
+    def dependency_analyzer(self):
+        """Inspect npm dependencies for issues"""
+        return self.toolset()["Dependency Analyzer"]()
+
+    @tool
+    def watchdog_service_analyzer(self):
+        """Profile the watchdog service"""
+        return self.toolset()["Watchdog Service Analyzer"]()
+
+    @tool
+    def security_scanner(self):
+        """Scan for security vulnerabilities"""
+        return self.toolset()["Security Scanner"]()
+
+    @tool
+    def test_generator(self):
+        """Generate unit tests"""
+        return self.toolset()["Test Generator"]()
+
+    @tool
+    def node_version_migrator(self):
+        """Assist in upgrading Node.js versions"""
+        return self.toolset()["Node Version Migrator"]()
+
+    @tool
+    def esm_migration_tool(self):
+        """Convert CommonJS modules to ESM"""
+        return self.toolset()["ESM Migration Tool"]()
+
+    @tool
+    def native_module_migrator(self):
+        """Handle migration of native modules"""
+        return self.toolset()["Native Module Migrator"]()
 
     # ---- optional: validate agent tool names early (very helpful) ----
     def _validate_agent_tools(self):

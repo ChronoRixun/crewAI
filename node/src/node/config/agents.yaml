@@ -7,7 +7,7 @@ code_analyst:
   verbose: true
   allow_delegation: false
   tools:
-    - "Node Code Analyzer"
+    - node_code_analyzer
 
 modernization_specialist:
   role: "Modernization Specialist"
@@ -17,8 +17,8 @@ modernization_specialist:
   verbose: true
   allow_delegation: false
   tools:
-    - "ESM Migration Tool"
-    - "Node Version Migrator"
+    - esm_migration_tool
+    - node_version_migrator
     
 dependency_manager:
   role: Dependency Manager
@@ -27,7 +27,7 @@ dependency_manager:
   verbose: true
   allow_delegation: false
   tools:
-    - Dependency Analyzer
+    - dependency_analyzer
 
 testing_engineer:
   role: Testing Engineer
@@ -36,7 +36,7 @@ testing_engineer:
   verbose: true
   allow_delegation: false
   tools:
-    - Test Generator
+    - test_generator
 
 security_auditor:
   role: Security Auditor
@@ -45,7 +45,7 @@ security_auditor:
   verbose: true
   allow_delegation: false
   tools:
-    - Security Scanner
+    - security_scanner
 
 build_config_specialist:
   role: Build Config Specialist
@@ -54,7 +54,7 @@ build_config_specialist:
   verbose: true
   allow_delegation: false
   tools:
-    - Native Module Migrator
+    - native_module_migrator
 
 performance_optimizer:
   role: Performance Optimizer
@@ -63,4 +63,4 @@ performance_optimizer:
   verbose: true
   allow_delegation: false
   tools:
-    - Watchdog Service Analyzer
+    - watchdog_service_analyzer

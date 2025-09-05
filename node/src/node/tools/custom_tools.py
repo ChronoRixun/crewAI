@@ -1,6 +1,9 @@
 # src/node/tools/custom_tools.py
 from typing import Callable, Dict
 
+from crewai.tools import BaseTool
+from pydantic import BaseModel
+
 # import tool classes from the singular file in the same package
 from .custom_tool import (
     NodeCodeAnalyzer,
@@ -15,12 +18,28 @@ from .custom_tool import (
 try:
     from .esm_migration_tool import ESMMigrationTool
 except Exception:
-    ESMMigrationTool = None
+    class _ESMDummy(BaseTool):
+        name: str = "ESM Migration Tool"
+        description: str = "Placeholder ESM migration tool"
+        args_schema: type[BaseModel] = type("ESMStubArgs", (BaseModel,), {})
+
+        def _run(self, *args, **kwargs):
+            return {"error": "ESM Migration Tool not available"}
+
+    ESMMigrationTool = _ESMDummy
 
 try:
     from .native_module_migrator import NativeModuleMigrator
 except Exception:
-    NativeModuleMigrator = None
+    class _NativeDummy(BaseTool):
+        name: str = "Native Module Migrator"
+        description: str = "Placeholder native module migrator"
+        args_schema: type[BaseModel] = type("NativeStubArgs", (BaseModel,), {})
+
+        def _run(self, *args, **kwargs):
+            return {"error": "Native Module Migrator not available"}
+
+    NativeModuleMigrator = _NativeDummy
 
 
 def _ctor(cls):
