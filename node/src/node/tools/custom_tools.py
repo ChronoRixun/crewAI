@@ -15,12 +15,22 @@ from .custom_tool import (
 try:
     from .esm_migration_tool import ESMMigrationTool
 except Exception:
-    ESMMigrationTool = None
+    from crewai.tools import BaseTool
+    class ESMMigrationTool(BaseTool):
+        name: str = "ESM Migration Tool"
+        description: str = "Placeholder tool: real implementation unavailable"
+        def _run(self, *args, **kwargs):  # type: ignore[override]
+            return {"error": "ESM Migration Tool not installed"}
 
 try:
     from .native_module_migrator import NativeModuleMigrator
 except Exception:
-    NativeModuleMigrator = None
+    from crewai.tools import BaseTool
+    class NativeModuleMigrator(BaseTool):
+        name: str = "Native Module Migrator"
+        description: str = "Placeholder tool: real implementation unavailable"
+        def _run(self, *args, **kwargs):  # type: ignore[override]
+            return {"error": "Native Module Migrator not installed"}
 
 
 def _ctor(cls):
