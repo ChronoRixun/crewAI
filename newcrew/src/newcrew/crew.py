@@ -2,6 +2,8 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
+
+from .tools.custom_tool import MyCustomTool
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
@@ -21,16 +23,19 @@ class Newcrew():
     # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
     def researcher(self) -> Agent:
+        """Researcher agent with access to a sample custom tool."""
         return Agent(
-            config=self.agents_config['researcher'], # type: ignore[index]
-            verbose=True
+            config=self.agents_config['researcher'],  # type: ignore[index]
+            tools=[MyCustomTool()],
+            verbose=True,
         )
 
     @agent
     def reporting_analyst(self) -> Agent:
+        """Analyst agent without tools for demonstration purposes."""
         return Agent(
-            config=self.agents_config['reporting_analyst'], # type: ignore[index]
-            verbose=True
+            config=self.agents_config['reporting_analyst'],  # type: ignore[index]
+            verbose=True,
         )
 
     # To learn more about structured task outputs,
