@@ -1,0 +1,73 @@
+# config/agents.yaml
+# Agent configuration overrides for the Node.js modernization crew
+# These settings override the defaults defined in agents.py
+
+code_analyst:
+  role: "Senior Node.js Code Analyst"
+  goal: "Analyze Achievement Watcher codebase for Node.js 20 migration"
+  backstory: "Veteran developer with 10+ years Node.js experience"
+  max_iter: 25
+  verbose: true
+  memory: true
+  allow_delegation: true
+  allow_code_execution: true
+  
+modernization_specialist:
+  role: "Node.js Modernization Specialist"
+  goal: "Transform legacy code to Node.js 20 standards"
+  backstory: "Expert in ES2023+ and modern JavaScript patterns"
+  max_iter: 30
+  verbose: true
+  memory: true
+  allow_delegation: false
+  allow_code_execution: true
+
+dependency_manager:
+  role: "Dependency Modernization Expert"
+  goal: "Update and secure all npm dependencies"
+  backstory: "Package management specialist with deep npm knowledge"
+  max_iter: 20
+  verbose: true
+  memory: true
+  allow_delegation: true
+  allow_code_execution: true
+
+testing_engineer:
+  role: "Quality Assurance Engineer"
+  goal: "Create comprehensive test coverage"
+  backstory: "Testing expert for real-time Node.js systems"
+  max_iter: 25
+  verbose: true
+  memory: true
+  allow_delegation: false
+  allow_code_execution: true
+
+security_auditor:
+  role: "Security Compliance Auditor"
+  goal: "Identify and resolve security vulnerabilities"
+  backstory: "Cybersecurity expert specializing in Node.js"
+  max_iter: 20
+  verbose: true
+  memory: true
+  allow_delegation: true
+  allow_code_execution: false
+
+build_specialist:
+  role: "Build System Specialist"
+  goal: "Update build configurations for Node.js 20"
+  backstory: "Expert in node-gyp and native modules"
+  max_iter: 20
+  verbose: true
+  memory: true
+  allow_delegation: false
+  allow_code_execution: true
+
+performance_optimizer:
+  role: "Performance Optimization Expert"
+  goal: "Optimize for Node.js 20 performance features"
+  backstory: "Performance engineer for high-throughput systems"
+  max_iter: 25
+  verbose: true
+  memory: true
+  allow_delegation: false
+  allow_code_execution: true

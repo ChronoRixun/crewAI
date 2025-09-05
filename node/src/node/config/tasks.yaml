@@ -1,0 +1,109 @@
+# config/tasks.yaml
+# Task configuration for the Node.js modernization crew
+# These settings define task parameters and dependencies
+
+analyze_codebase:
+  description: "Comprehensive analysis of Achievement Watcher codebase"
+  agent: "code_analyst"
+  output_file: "analysis_report.json"
+  priority: 1
+  estimated_time: "30 minutes"
+  dependencies: []
+  
+analyze_dependencies:
+  description: "Analyze npm dependencies for compatibility"
+  agent: "dependency_manager"
+  output_file: "dependency_report.json"
+  priority: 1
+  estimated_time: "20 minutes"
+  dependencies: []
+  parallel: true  # Can run parallel with codebase analysis
+
+modernize_javascript:
+  description: "Transform code to modern JavaScript/ES2023+"
+  agent: "modernization_specialist"
+  output_file: "modernization_log.json"
+  priority: 2
+  estimated_time: "45 minutes"
+  dependencies: ["analyze_codebase"]
+  
+update_dependencies:
+  description: "Update npm packages to Node.js 20 compatible versions"
+  agent: "dependency_manager"
+  output_file: "dependency_update_log.json"
+  priority: 2
+  estimated_time: "30 minutes"
+  dependencies: ["analyze_dependencies"]
+
+update_build_config:
+  description: "Update build system and configurations"
+  agent: "build_specialist"
+  output_file: "build_config_report.json"
+  priority: 2
+  estimated_time: "20 minutes"
+  dependencies: ["analyze_codebase", "analyze_dependencies"]
+
+create_test_suite:
+  description: "Generate comprehensive test coverage"
+  agent: "testing_engineer"
+  output_file: "test_suite_report.json"
+  priority: 3
+  estimated_time: "40 minutes"
+  dependencies: ["modernize_javascript"]
+  
+security_audit:
+  description: "Perform security vulnerability assessment"
+  agent: "security_auditor"
+  output_file: "security_audit_report.json"
+  priority: 3
+  estimated_time: "25 minutes"
+  dependencies: ["modernize_javascript", "update_dependencies"]
+  parallel: true
+
+optimize_performance:
+  description: "Optimize code for Node.js 20 performance"
+  agent: "performance_optimizer"
+  output_file: "performance_report.json"
+  priority: 3
+  estimated_time: "35 minutes"
+  dependencies: ["modernize_javascript"]
+  parallel: true
+
+create_migration_guide:
+  description: "Generate comprehensive migration documentation"
+  agent: "code_analyst"
+  output_file: "migration_guide.md"
+  priority: 4
+  estimated_time: "15 minutes"
+  dependencies: [
+    "analyze_codebase",
+    "analyze_dependencies", 
+    "modernize_javascript",
+    "update_dependencies",
+    "create_test_suite",
+    "security_audit",
+    "optimize_performance",
+    "update_build_config"
+  ]
+
+# Task execution settings
+execution:
+  process: "sequential"  # or "hierarchical"
+  max_parallel_tasks: 3
+  timeout_per_task: 3600  # 1 hour in seconds
+  retry_failed_tasks: true
+  max_retries: 2
+  save_intermediate_results: true
+  
+# Quality gates
+quality_gates:
+  test_coverage_threshold: 80  # Minimum test coverage percentage
+  security_severity_threshold: "high"  # Block on high/critical issues
+  performance_regression_threshold: 10  # Max acceptable performance degradation %
+  
+# Notification settings
+notifications:
+  on_phase_complete: true
+  on_task_failure: true
+  on_completion: true
+  webhook_url: ""  # Optional: Slack/Discord webhook for notifications
