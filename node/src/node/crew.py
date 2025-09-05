@@ -5,6 +5,9 @@ from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from node.tools import custom_tools as ct
 
+# Initialize tool registry once at import time
+TOOL_REGISTRY = ct.get_tool_functions()
+
 # IMPORTANT: use package import (requires src/node/tools/__init__.py to exist)
 
 @CrewBase
@@ -17,12 +20,12 @@ class Node:
     def toolset(self):
         # Print where we loaded the registry from + its keys
         print("[DEBUG] using custom_tools from:", ct.__file__)
-        return ct.get_tool_functions()
+        return TOOL_REGISTRY
 
     @property
     def tool_functions(self):
         # Back-compat for older CrewAI code-paths
-        return self.toolset()
+        return TOOL_REGISTRY
 
     # ---- optional: validate agent tool names early (very helpful) ----
     def _validate_agent_tools(self):
